@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 340" role="img" aria-labelledby="title description">
+  <title id="title">AeroSwift boarding priority aircraft layout</title>
+  <desc id="description">Top-down aircraft diagram ordered from nose to tail: Business Class, Zone A, Zone B, Zone C.</desc>
+  <defs>
+    <clipPath id="fuselage-clip">
+      <path d="M32 170c20-35 47-53 83-53h435l61 27 91 26-91 26-61 27H115c-36 0-63-18-83-53Z"/>
+    </clipPath>
+  </defs>
+
+  <rect x="1" y="1" width="758" height="338" rx="22" fill="#f3f6f8" stroke="#e1e8ec" stroke-width="2"/>
+  <text x="30" y="38" fill="#10263f" font-family="Segoe UI, Arial, sans-serif" font-size="17" font-weight="700" letter-spacing="1.2">BOARDING PRIORITY LAYOUT</text>
+  <text x="30" y="61" fill="#6d7b89" font-family="Segoe UI, Arial, sans-serif" font-size="12">Schematic view · front of aircraft to rear</text>
+
+  <g fill="#dbe4e9" stroke="#9eafb9" stroke-width="2" stroke-linejoin="round">
+    <path d="M298 128 204 48q-10-9 5-6l244 70 31 25Z"/>
+    <path d="m298 212-94 80q-10 9 5 6l244-70 31-25Z"/>
+    <path d="m540 128 74-35q9-4 8 6l-9 36Z"/>
+    <path d="m540 212 74 35q9 4 8-6l-9-36Z"/>
+  </g>
+
+  <path d="M32 170c20-35 47-53 83-53h435l61 27 91 26-91 26-61 27H115c-36 0-63-18-83-53Z" fill="#ffffff" stroke="#10263f" stroke-width="3"/>
+
+  <g clip-path="url(#fuselage-clip)">
+    <rect x="95" y="116" width="116" height="108" fill="#f1b94c"/>
+    <rect x="211" y="116" width="108" height="108" fill="#087f82"/>
+    <rect x="319" y="116" width="108" height="108" fill="#4d7896"/>
+    <rect x="427" y="116" width="108" height="108" fill="#1b3857"/>
+    <path d="M211 116v108M319 116v108M427 116v108" stroke="#ffffff" stroke-opacity=".7" stroke-width="2"/>
+  </g>
+
+  <g font-family="Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle">
+    <text x="153" y="163" fill="#10263f" font-size="12">BUSINESS</text>
+    <text x="153" y="181" fill="#10263f" font-size="12">CLASS</text>
+    <text x="265" y="174" fill="#ffffff" font-size="15">ZONE A</text>
+    <text x="373" y="174" fill="#ffffff" font-size="15">ZONE B</text>
+    <text x="481" y="174" fill="#ffffff" font-size="15">ZONE C</text>
+  </g>
+
+  <g font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="700" text-anchor="middle">
+    <circle cx="153" cy="199" r="10" fill="#ffffff" fill-opacity=".72"/>
+    <circle cx="265" cy="199" r="10" fill="#ffffff" fill-opacity=".22"/>
+    <circle cx="373" cy="199" r="10" fill="#ffffff" fill-opacity=".22"/>
+    <circle cx="481" cy="199" r="10" fill="#ffffff" fill-opacity=".22"/>
+    <text x="153" y="203" fill="#10263f">1</text>
+    <text x="265" y="203" fill="#ffffff">2</text>
+    <text x="373" y="203" fill="#ffffff">3</text>
+    <text x="481" y="203" fill="#ffffff">4</text>
+  </g>
+
+  <path d="M120 275h510" fill="none" stroke="#087f82" stroke-width="2"/>
+  <path d="m630 269 12 6-12 6" fill="none" stroke="#087f82" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="31" y="279" fill="#10263f" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-weight="700">NOSE / FRONT</text>
+  <text x="648" y="279" fill="#10263f" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-weight="700" text-anchor="end">TAIL / REAR</text>
+  <text x="380" y="315" fill="#6d7b89" font-family="Segoe UI, Arial, sans-serif" font-size="10" text-anchor="middle">Illustrative cabin zones, not a seat map</text>
+</svg>

@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10263f">
+  <title>Boarding Gate | AeroSwift</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="AeroSwift home">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 40 40" focusable="false">
+          <path d="M5 22.5 34 8l-9.5 24-5.3-8-8 5.2 2.2-9.2L5 22.5Z" fill="currentColor"/>
+          <path d="m13.4 20.8 11.1-7.1-6.1 9.5" fill="none" stroke="#10263f" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"/>
+        </svg>
+      </span>
+      <span class="brand-name">Aero<span>Swift</span></span>
+    </a>
+    <div class="topbar-note"><span class="live-dot"></span> Live boarding</div>
+  </header>
+
+  <main class="page-shell">
+    <section class="flight-card" aria-label="Flight information">
+      <div class="flight-route">
+        <span class="eyebrow">NOW BOARDING</span>
+        <h1>Welcome to your gate</h1>
+        <p>Have your boarding pass ready. Passengers are called in order below.</p>
+      </div>
+      <div class="flight-details">
+        <div><span class="detail-label">FLIGHT</span><strong>AS 204</strong></div>
+        <div><span class="detail-label">DESTINATION</span><strong>San Francisco <span class="airport-code">SFO</span></strong></div>
+        <div><span class="detail-label">GATE</span><strong class="gate-number">A12</strong></div>
+      </div>
+    </section>
+
+    <div class="content-grid">
+      <section class="passenger-panel" aria-labelledby="queue-heading">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">UP NEXT</span>
+            <h2 id="queue-heading">Next passengers</h2>
+          </div>
+          <span class="queue-count"><span id="queue-count">—</span> IN QUEUE</span>
+        </div>
+        <p class="panel-hint">Select a passenger when they are ready to board.</p>
+
+        <ol class="passenger-list" id="passenger-list" aria-live="polite"></ol>
+        <p class="status-message" id="status-message" role="status">Loading next passengers…</p>
+      </section>
+
+      <aside class="priority-panel" aria-labelledby="priority-heading">
+        <div class="priority-heading">
+          <span class="priority-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false">
+              <path d="M12 3.2 14.7 8.7l6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1-4.4-4.3 6.1-.9L12 3.2Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="1.7"/>
+            </svg>
+          </span>
+          <div>
+            <span class="eyebrow">BOARDING PRIORITY</span>
+            <h2 id="priority-heading">Default boarding order</h2>
+          </div>
+        </div>
+        <p class="panel-hint">Passengers are ordered by these default priorities.</p>
+
+        <ol class="priority-order">
+          <li><span>Business_Class</span></li>
+          <li><span>Zone=C</span></li>
+          <li><span>Zone=B</span></li>
+          <li><span>Zone=A</span></li>
+        </ol>
+
+        <form id="priority-form">
+          <fieldset class="toggle-field">
+            <legend>Senior citizen</legend>
+            <div class="segmented-control">
+              <label><input type="radio" name="seniorCitizen" value="true"><span>Yes</span></label>
+              <label><input type="radio" name="seniorCitizen" value="false" checked><span>No</span></label>
+            </div>
+          </fieldset>
+
+          <fieldset class="toggle-field">
+            <legend>Veteran</legend>
+            <div class="segmented-control">
+              <label><input type="radio" name="veteran" value="true"><span>Yes</span></label>
+              <label><input type="radio" name="veteran" value="false" checked><span>No</span></label>
+            </div>
+          </fieldset>
+        </form>
+
+        <div class="privacy-note">
+          <span class="info-icon" aria-hidden="true">i</span>
+          <p>Priority details apply to the next boarding request.</p>
+        </div>
+      </aside>
+    </div>
+
+    <footer class="page-footer">
+      <span>Need assistance? Please speak with an AeroSwift gate agent.</span>
+      <a href="https://www.aeroswift.example">aeroswift.example</a>
+    </footer>
+  </main>
+</body>
+</html>

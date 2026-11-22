@@ -1,0 +1,497 @@
+<!doctype html>
+<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word">
+<head>
+<meta charset="utf-8">
+<title>AeroSwiftBoard Project Report</title>
+<style>
+@page { size: A4; margin: 2.54cm 2.54cm 2.54cm 3.81cm; }
+body { font-family: "Times New Roman", serif; font-size: 12pt; line-height: 1.5; color: #111; text-align: justify; }
+p { margin: 0 0 8pt 0; }
+h1 { mso-style-name: "Heading 1"; font-size: 16pt; text-align: center; font-weight: bold; margin: 0 0 18pt 0; }
+h2 { mso-style-name: "Heading 2"; font-size: 14pt; font-weight: bold; margin: 16pt 0 8pt 0; }
+h3 { mso-style-name: "Heading 3"; font-size: 12pt; font-weight: bold; margin: 12pt 0 6pt 0; }
+.cover { text-align: center; page-break-after: always; }
+.front { page-break-before: always; }
+.chapter { page-break-before: always; }
+.appendix { page-break-before: always; }
+.center { text-align: center; }
+.small { font-size: 10pt; }
+.caption { text-align: center; font-size: 10pt; font-weight: bold; margin: 6pt 0 10pt 0; }
+.note { font-size: 10pt; font-style: italic; }
+table { border-collapse: collapse; width: 100%; margin: 8pt 0 12pt 0; font-size: 10pt; }
+th, td { border: 1px solid #444; padding: 5pt; vertical-align: top; }
+th { background: #e8eef4; text-align: center; font-weight: bold; }
+pre { font-family: Consolas, "Courier New", monospace; font-size: 8pt; line-height: 1.1; white-space: pre-wrap; border: 1px solid #aaa; background: #f6f7f8; padding: 7pt; }
+ul, ol { margin-top: 3pt; margin-bottom: 8pt; }
+.signature { margin-top: 28pt; }
+.brand { color: #10263f; font-size: 21pt; font-weight: bold; letter-spacing: 1pt; }
+.rule { border-top: 1px solid #777; margin: 12pt 0; }
+</style>
+</head>
+<body>
+
+<div class="cover">
+<p class="brand">AEROSWIFT BOARD</p>
+<p><b>Ajeenkya D Y Patil University, Pune</b><br>School of Engineering<br>Computer Science and Engineering</p>
+<div class="rule"></div>
+<p style="font-size:20pt; font-weight:bold; margin-top:55pt;">DESIGN AND DEVELOPMENT OF<br>A FLIGHT BOARDING GATE MANAGEMENT SYSTEM</p>
+<p style="font-size:14pt; margin-top:20pt;">A Project Report</p>
+<p>Submitted in partial fulfilment of the academic requirements for<br><b>Bachelor of Technology in Computer Science and Engineering</b></p>
+<p style="margin-top:30pt;"><b>Submitted by</b><br>Mitali Mittal<br>URN: E25B000189<br>Second Year, Division B<br>Project completed individually</p>
+<p style="margin-top:28pt;"><b>Academic Year:</b> [Academic Year]<br><b>Semester:</b> [Semester]</p>
+<p style="margin-top:35pt;">15 November 2026</p>
+</div>
+
+<div class="front">
+<h1>PROJECT CERTIFICATE</h1>
+<p>This is to certify that the project report entitled <b>“Design and Development of a Flight Boarding Gate Management System”</b> describes the individual project work completed by <b>Mitali Mittal (URN: E25B000189)</b>, a student of Second Year, Division B, Bachelor of Technology in Computer Science and Engineering, Ajeenkya D Y Patil University, Pune.</p>
+<p>The report documents the design, implementation, and verification of AeroSwiftBoard, a Java and Spring Boot web application prototype for displaying and managing a prioritized passenger boarding list. The work is submitted for academic review. Institutional approval, if required, is to be recorded by the authorized department.</p>
+<p class="signature">Place: Pune<br>Date: __________________</p>
+<table>
+<tr><td style="height:60pt;">Student signature<br><b>Mitali Mittal</b></td><td>Department verification<br>Name / signature: __________________</td></tr>
+<tr><td>URN: E25B000189</td><td>Institution seal (if required)</td></tr>
+</table>
+</div>
+
+<div class="front">
+<h1>DECLARATION</h1>
+<p>I, <b>Mitali Mittal</b> (URN: <b>E25B000189</b>), declare that this report, entitled <b>“Design and Development of a Flight Boarding Gate Management System”</b>, is submitted as documentation of my individual academic project. It describes the AeroSwiftBoard application as implemented in the project workspace and distinguishes implemented functionality from proposed future work.</p>
+<p>The report is prepared for academic assessment. Any external ideas or technical material used in the literature discussion are acknowledged in the references. The application is a prototype and is not represented as a production airline system or as evidence of measured reductions in boarding time.</p>
+<p>I understand that the final report must be reviewed against the University's academic integrity and submission requirements before signing.</p>
+<p class="signature">Place: Pune<br>Date: __________________<br><br><br>Signature: ___________________________<br><b>Mitali Mittal</b><br>URN: E25B000189</p>
+</div>
+
+<div class="front">
+<h1>ACKNOWLEDGEMENT</h1>
+<p>I would like to express my gratitude to Ajeenkya D Y Patil University and the School of Engineering for providing an academic setting in which I could explore software design and application development. I also acknowledge the faculty members of the Computer Science and Engineering programme for the concepts in programming, data structures, web technologies, and software testing that informed this work.</p>
+<p>This project gave me an opportunity to study a familiar airport process and translate it into a small web application. I am thankful to the people who offered informal feedback on the clarity of the boarding display and the organization of the report. Their observations helped me focus on visible queue status, clear passenger details, and straightforward interactions.</p>
+<p>AeroSwiftBoard was completed as an individual project. The implementation and this report are intended for learning and demonstration; they do not connect to airline operational systems. I accept responsibility for checking all institutional details, completing any required approval fields, and reviewing the final submission before it is handed in.</p>
+<p class="signature">Mitali Mittal<br>URN: E25B000189</p>
+</div>
+
+<div class="front">
+<h1>ABSTRACT</h1>
+<p>Airline boarding can become difficult to coordinate when passengers gather at a gate after an announcement and staff must call them in an orderly sequence. This project presents AeroSwiftBoard, a small web application prototype that demonstrates a digital boarding queue and configurable priority ordering. The interface is implemented with plain HTML, CSS, and JavaScript; the backend uses Java and Spring Boot REST APIs.</p>
+<p>At application startup, passenger records are read from a classpath CSV file into an in-memory singleton state. The user interface requests the next five passengers and displays their names, zones, veteran status, and a senior-citizen indicator derived from age 58 or above. A gate operator can select a displayed passenger to record boarding. The backend removes that passenger from the current queue and reports the remaining passenger count. The interface also offers senior-citizen and veteran preference selections. These preferences are stored in memory and determine which comparator orders the next list: default business-class and zone order, senior-citizen-first order, or senior-citizen-and-veteran order.</p>
+<p>The project uses Spring MVC controllers, service classes, Java collections, comparator-based sorting, and JUnit/Spring MockMvc tests. Verification covers CSV loading, comparator selection, queue retrieval, input validation, and passenger removal. The prototype does not integrate with airline systems, persist boarding state, authenticate users, or measure operational boarding-time improvement. It provides a foundation for discussing how a clear, API-driven gate display could support a more organized boarding workflow.</p>
+<p><b>Keywords:</b> flight boarding, Java, Spring Boot, REST API, comparator, passenger queue, web application.</p>
+</div>
+
+<div class="front">
+<h1>TABLE OF CONTENTS</h1>
+<p>[[TOC]]</p>
+</div>
+
+<div class="front">
+<h1>LIST OF FIGURES</h1>
+<p>Figure 3.1 &nbsp; AeroSwiftBoard logical component architecture</p>
+<p>Figure 3.2 &nbsp; Passenger queue retrieval and boarding workflow</p>
+<p>Figure 3.3 &nbsp; Comparator selection and ordering logic</p>
+<p>Figure 4.1 &nbsp; Boarding screen information layout (logical representation)</p>
+<p>Figure 5.1 &nbsp; Verification workflow</p>
+<p class="note">The figures in this report are logical diagrams derived from the implemented source; no live airline interface or production screenshot is claimed.</p>
+</div>
+
+<div class="front">
+<h1>LIST OF TABLES</h1>
+<p>Table 2.1 &nbsp; Summary of related boarding research</p>
+<p>Table 3.1 &nbsp; Functional requirements</p>
+<p>Table 3.2 &nbsp; Non-functional requirements and prototype constraints</p>
+<p>Table 3.3 &nbsp; Data structures used in the Java implementation</p>
+<p>Table 3.4 &nbsp; Application components and responsibilities</p>
+<p>Table 4.1 &nbsp; REST API summary</p>
+<p>Table 5.1 &nbsp; Verification cases and observed outcomes</p>
+<p>Table 5.2 &nbsp; Algorithmic complexity summary</p>
+</div>
+
+<div class="front">
+<h1>ABBREVIATIONS</h1>
+<table><tr><th>Abbreviation</th><th>Meaning</th></tr>
+<tr><td>API</td><td>Application Programming Interface</td></tr>
+<tr><td>CSV</td><td>Comma-Separated Values</td></tr>
+<tr><td>HTTP</td><td>Hypertext Transfer Protocol</td></tr>
+<tr><td>JSON</td><td>JavaScript Object Notation</td></tr>
+<tr><td>JVM</td><td>Java Virtual Machine</td></tr>
+<tr><td>MVC</td><td>Model-View-Controller</td></tr>
+<tr><td>REST</td><td>Representational State Transfer</td></tr>
+<tr><td>SPA</td><td>Single-Page Application</td></tr>
+<tr><td>URN</td><td>University Registration Number</td></tr>
+</table>
+</div>
+
+<div class="chapter">
+<h1>CHAPTER 1 — INTRODUCTION</h1>
+<h2>1.1 Background</h2>
+<p>Boarding is the final passenger-facing process before an aircraft departs. At a gate, staff must communicate who may board, keep the line moving, and respond to passengers who need assistance. A gate announcement can prompt many passengers to approach at nearly the same time. If the sequence is not visible or is difficult to follow, passengers may be uncertain about when they should join the line. A display that makes the next group and the ordering rule easy to understand can support communication between the gate team and passengers.</p>
+<p>Boarding order is also an operational problem. Airlines may organize boarding by cabin, zones, seating location, loyalty status, accessibility needs, or other policies. These policies are not interchangeable: the most appropriate sequence depends on the airline's operational goals, aircraft layout, passenger mix, and service rules. This project does not attempt to optimize a real airline schedule. Instead, it implements a small, explicit priority policy that can be changed through the interface and evaluated as a programming exercise.</p>
+<p>AeroSwiftBoard is a single-page gate display connected to a Java backend. On initial load, the browser requests a list of five passengers. The backend returns passenger records ordered using the active comparator and also reports the size of the full remaining queue. A user can select a passenger to board; the backend removes that passenger from the in-memory state, and the browser refreshes the list. Optional senior-citizen and veteran selections change the sorting comparator. The front end is built with native browser technologies instead of a framework so the request/response behavior is visible to a beginner developer.</p>
+<h2>1.2 Problem Statement</h2>
+<p>At a busy boarding gate, passengers may gather immediately after an announcement and have limited visibility into the intended boarding sequence. A static or verbal process can make it harder to communicate the next passengers and to reflect priority choices consistently. The project addresses this learning-scale problem by providing a web screen that displays the next five passengers in a deterministic priority order, accepts boarding actions, and refreshes the queue through REST APIs. It does not claim that a digital display alone resolves airport crowding or improves measured boarding time.</p>
+<h2>1.3 Aim and Objectives</h2>
+<p><b>Aim:</b> To design and implement a beginner-friendly web prototype for displaying and managing a prioritized list of passengers at a flight boarding gate.</p>
+<ol>
+<li>Build a single-screen, responsive boarding display using plain HTML, CSS, and JavaScript.</li>
+<li>Implement a Java/Spring Boot backend with APIs for listing passengers, recording boarding, and saving priority preferences.</li>
+<li>Load passenger sample records from a CSV resource at startup and maintain the active queue in a singleton application service.</li>
+<li>Implement comparator-based ordering for default, senior-citizen, and veteran-aware priority modes.</li>
+<li>Display useful queue details while representing senior-citizen status as Yes/No for passengers aged 58 or above.</li>
+<li>Validate the core backend behavior with automated tests and document known limitations and future extensions.</li>
+</ol>
+<h2>1.4 Scope</h2>
+<p>The scope includes local application startup, CSV parsing, in-memory passenger state, a static single-page interface served by Spring Boot, queue retrieval with a configurable positive limit, passenger boarding by boarding-pass number, and an API that stores two Boolean preferences. The default order is Business_Class, Zone C, Zone B, and Zone A. When senior-citizen preference is active, passengers aged 58 or above are ranked first. When veteran preference is active, the combined comparator ranks seniors first, then veterans, followed by the default cabin/zone order.</p>
+<p>The project uses a sample CSV and illustrative flight details in the UI. It is not connected to a check-in system, airline reservation database, flight schedule, gate display network, identity service, or boarding-pass scanner. The queue resets from the CSV when the application restarts. The UI preference state also resets to false/false at startup. The browser does not sign in an operator, and the backend has no authorization, audit trail, persistent database, distributed state, or production deployment configuration.</p>
+<h2>1.5 Project Significance</h2>
+<p>The project demonstrates an end-to-end software path: records are read from a file, represented as Java objects, ordered by explicit comparison rules, exposed as JSON through HTTP, and presented in a browser. It provides a concrete example for studying API boundaries, data structures, state management, user feedback, input validation, and automated tests. Its value is educational and demonstrative rather than operational.</p>
+<h2>1.6 Organization of the Report</h2>
+<p>Chapter 1 introduces the problem and scope. Chapter 2 summarizes relevant literature on aircraft boarding strategies and explains the relationship between research findings and this prototype. Chapter 3 documents requirements, logical architecture, data structures, and algorithms. Chapter 4 describes implementation details and API usage. Chapter 5 records the verification approach, cases, results, and complexity analysis. Chapter 6 concludes the work and identifies future extensions. The appendices provide setup instructions, supporting material, and project-source references.</p>
+</div>
+
+<div class="chapter">
+<h1>CHAPTER 2 — LITERATURE SURVEY</h1>
+<h2>2.1 Introduction</h2>
+<p>Aircraft boarding has been studied as a problem involving passenger sequencing, seat location, aisle movement, carry-on luggage, and conflicts among passengers entering the same row. Research shows that a boarding rule can affect time and congestion, but a rule that performs well in one model or operating context is not automatically best for every airline. This chapter reviews relevant studies and uses them as context for the limited policy implemented in AeroSwiftBoard. The review does not treat the prototype's comparator policy as a proven optimization.</p>
+<!--LITERATURE_RESEARCH_PLACEHOLDER-->
+<h2>2.3 Synthesis and Relevance to AeroSwiftBoard</h2>
+<p>The studies collectively indicate that boarding order is only one part of a larger process. Aircraft configuration, passenger behavior, overhead-bin use, seat assignments, and group travel affect actual boarding time. AeroSwiftBoard therefore treats its ordering rules as configurable demonstration logic rather than an empirically optimal boarding policy. The application makes the policy observable and testable: the active preference determines a comparator, the comparator produces an ordered view, and the UI presents the first five entries.</p>
+<p>The gap addressed by this project is not a lack of boarding algorithms. Rather, it is the educational demonstration of a small, understandable software implementation that connects a user-visible boarding sequence to an API and explicit ordering rules. The project does not reproduce the passenger behavior models in academic studies and does not compare boarding times under controlled conditions.</p>
+<h2>2.4 Limitations of the Review</h2>
+<p>The review is intentionally focused on selected boarding-order and boarding-time studies. It is not a systematic review of airline operations research, accessibility policy, airport crowd management, or all possible boarding algorithms. The cited works support the motivation for treating boarding sequence as a meaningful design concern; they do not validate the application as a real operational system.</p>
+</div>
+
+<div class="chapter">
+<h1>CHAPTER 3 — SYSTEM ANALYSIS AND DESIGN</h1>
+<h2>3.1 Existing Process and Proposed Prototype</h2>
+<p>In a conventional gate process, staff announce boarding and passengers use announcements, gate displays, and staff direction to decide when to approach. This project models only a narrow part of that workflow: showing a short next-passenger list, displaying simple priority attributes, and recording the operator's selection. The proposed screen can help make the demonstration queue visible, but it does not replace announcements, accessibility services, airline policies, or gate-agent judgement.</p>
+<h2>3.2 Functional Requirements</h2>
+<table><tr><th>ID</th><th>Requirement</th><th>Implementation evidence</th></tr>
+<tr><td>FR-01</td><td>Load passenger records from the packaged CSV when the application starts.</td><td>PassengerCsvLoader and PassengerStartupLoader.</td></tr>
+<tr><td>FR-02</td><td>Maintain the active passenger list for the running application instance.</td><td>PassengerState singleton Spring service.</td></tr>
+<tr><td>FR-03</td><td>Return up to a requested positive number of passengers and the total remaining count.</td><td>GET /api/passengers/boarding?limit=5.</td></tr>
+<tr><td>FR-04</td><td>Order the returned passengers using the comparator selected by UI preferences.</td><td>PassengerBoardingService.</td></tr>
+<tr><td>FR-05</td><td>Remove a selected passenger from the active list after the board action.</td><td>POST /api/passengers/{boardingPassNumber}/board.</td></tr>
+<tr><td>FR-06</td><td>Store the latest senior-citizen and veteran preferences for the application instance.</td><td>POST /api/boarding-priority.</td></tr>
+<tr><td>FR-07</td><td>Refresh the visible next-five list after initial load, boarding, and preference updates.</td><td>Browser JavaScript fetches the queue API.</td></tr>
+<tr><td>FR-08</td><td>Show zone, veteran Yes/No, and senior-citizen Yes/No alongside each passenger name.</td><td>Browser derives senior status from age &gt;= 58.</td></tr>
+<tr><td>FR-09</td><td>Return a client error for invalid limits or incomplete priority selections.</td><td>Controller validation and HTTP status responses.</td></tr>
+</table>
+<h2>3.3 Non-Functional Requirements and Constraints</h2>
+<table><tr><th>Concern</th><th>Prototype expectation</th><th>Constraint</th></tr>
+<tr><td>Usability</td><td>Display the next passengers clearly and make boarding an explicit button action.</td><td>No user study or accessibility audit has been performed.</td></tr>
+<tr><td>Maintainability</td><td>Keep controllers, services, models, and comparators in separate packages.</td><td>Small project; no plugin architecture.</td></tr>
+<tr><td>Correctness</td><td>Use deterministic comparison rules and validate API inputs.</td><td>Only the implemented ordering rules are covered.</td></tr>
+<tr><td>Responsiveness</td><td>Return a limited next-passenger list for the UI.</td><td>Entire queue is sorted in memory per request.</td></tr>
+<tr><td>Persistence</td><td>Keep state consistent during a running process.</td><td>State is memory-only and resets on restart.</td></tr>
+<tr><td>Security</td><td>Serve the local prototype over the application HTTP endpoint.</td><td>No authentication, authorization, TLS setup, or sensitive passenger-data controls.</td></tr>
+</table>
+<h2>3.4 Logical Architecture</h2>
+<p>The user interface communicates with the backend using same-origin HTTP requests. Static files are served by Spring Boot. REST controllers validate request parameters and delegate business operations to services. The boarding service reads the current passenger snapshot and selects a comparator using the preference state. Passenger data is loaded by a startup component from the classpath CSV.</p>
+<pre>+--------------------------+        HTTP/JSON        +-------------------------+
+| Browser UI               | ----------------------&gt; | REST controllers        |
+| HTML / CSS / JavaScript  | &lt;---------------------- | passenger, preferences  |
++--------------------------+                          +------------+------------+
+                                                                  |
+                                                       +----------v-----------+
+                                                       | PassengerBoarding    |
+                                                       | Service              |
+                                                       +----+------------+----+
+                                                            |            |
+                                           +----------------+            +----------------+
+                                           |                                                  |
+                                +----------v-----------+                          +-----------v----------+
+                                | PassengerState       |                          | PrioritySelection    |
+                                | immutable List view  |                          | State (singleton)    |
+                                +----------+-----------+                          +----------------------+
+                                           |
+                                +----------v-----------+
+                                | passengers.csv       |
+                                | loaded at startup    |
+                                +----------------------+
+
+                         Comparators: default / senior / senior-and-veteran</pre>
+<p class="caption">Figure 3.1 — AeroSwiftBoard logical component architecture</p>
+<h2>3.5 Data Structures Used</h2>
+<p>The original academic template refers to C++-specific structures. This report adapts that discussion to the actual Java implementation and does not claim that C++ containers are used. The implemented application uses Java collections and arrays only where appropriate.</p>
+<table><tr><th>Structure</th><th>Use in the project</th><th>Reason for use</th><th>Important operation</th></tr>
+<tr><td>Java List&lt;Passenger&gt;</td><td>Represents loaded and remaining passenger records.</td><td>Supports a variable number of records and stream sorting; the UI requests only an ordered prefix.</td><td>Traversal O(n), sorted view O(n log n).</td></tr>
+<tr><td>ArrayList&lt;Passenger&gt;</td><td>Temporary mutable copy when removing a boarded passenger.</td><td>Allows removal while preserving the original immutable snapshot until a replacement is ready.</td><td>Copy O(n), removeIf O(n).</td></tr>
+<tr><td>String[]</td><td>Holds the comma-separated fields for one CSV row after splitting.</td><td>Each row has a fixed expected number of fields.</td><td>Field access O(1).</td></tr>
+<tr><td>Comparator&lt;Passenger&gt;</td><td>Defines deterministic comparison rules for sorting.</td><td>Encapsulates distinct policies and allows the service to choose one by preference state.</td><td>One comparison O(1).</td></tr>
+</table>
+<p>The shared passenger state stores an immutable copy using <code>List.copyOf</code>. A new list snapshot replaces the old one after successful removal. This avoids callers directly mutating the shared list. Methods that modify or return the state are synchronized, while the reference is volatile for visibility. This is a simple in-process concurrency measure, not a distributed lock or transactional data store.</p>
+<h2>3.6 Comparator Rules</h2>
+<p>All comparator policies are ascending by priority rank: a lower rank appears earlier in the sorted output. The default comparator ranks <code>Business_Class</code> first, then Zone C, Zone B, and Zone A. Unrecognized or missing zones are assigned a fallback rank after the recognized zones. The senior-citizen comparator places passengers aged 58 or above before other passengers and then delegates ties to the default comparator. The combined comparator first ranks seniors, then veterans, then delegates remaining ties to the default comparator.</p>
+<table><tr><th>UI selection</th><th>Comparator selected</th><th>Priority sequence</th></tr>
+<tr><td>Senior No, Veteran No</td><td>DefaultBoardingPriorityComparator</td><td>Business_Class, C, B, A</td></tr>
+<tr><td>Senior Yes, Veteran No</td><td>SeniorCitizenBoardingPriorityComparator</td><td>Age 58+; then Business_Class, C, B, A</td></tr>
+<tr><td>Senior Yes, Veteran Yes</td><td>SeniorCitizenVeteranBoardingPriorityComparator</td><td>Age 58+; veterans; then Business_Class, C, B, A</td></tr>
+<tr><td>Senior No, Veteran Yes</td><td>SeniorCitizenVeteranBoardingPriorityComparator</td><td>Age 58+; veterans; then Business_Class, C, B, A</td></tr>
+</table>
+<p class="note">The UI preferences are treated as ordering-mode switches. When veteran is selected, the combined comparator still ranks senior citizens before veterans, reflecting the implemented comparator definition.</p>
+<pre>UI preference state
+        |
+        +-- veteran = true  -----------------&gt; SeniorCitizenVeteran comparator
+        |
+        +-- veteran = false, senior = true --&gt; SeniorCitizen comparator
+        |
+        +-- veteran = false, senior = false -&gt; Default comparator
+
+Selected comparator sorts the full in-memory list; the API returns its first limit records.</pre>
+<p class="caption">Figure 3.3 — Comparator selection and ordering logic</p>
+<h2>3.7 Queue Retrieval and Boarding Algorithm</h2>
+<ol>
+<li>The browser issues a GET request with a positive limit (the page uses five).</li>
+<li>The controller rejects a limit below one, then calls the boarding service.</li>
+<li>The service reads the current selection and obtains the matching comparator.</li>
+<li>The service sorts a stream of the current list, limits the result, and builds a response containing those passengers and the total queue count.</li>
+<li>When a board button is selected, the browser sends a POST request with that passenger's boarding-pass number.</li>
+<li>The state service creates a mutable copy, removes the matching record, and publishes a new immutable snapshot.</li>
+<li>The browser refreshes the queue and displays the updated count and status message.</li>
+</ol>
+<pre>Startup: read CSV -&gt; validate header and fields -&gt; create Passenger records -&gt; set shared list
+Queue:   read selection -&gt; select comparator -&gt; sort list -&gt; take limit -&gt; return list + count
+Board:   validate boarding-pass number -&gt; remove from copied list -&gt; replace state -&gt; refresh UI</pre>
+<p class="caption">Figure 3.2 — Passenger queue retrieval and boarding workflow</p>
+<h2>3.8 Component Responsibilities</h2>
+<table><tr><th>Component</th><th>Responsibility</th></tr>
+<tr><td>Passenger and response models</td><td>Represent passenger fields, priority selection, and queue response data.</td></tr>
+<tr><td>PassengerCsvLoader</td><td>Read passengers.csv, validate the header and field count, parse age and veteran values, and report malformed rows as I/O errors.</td></tr>
+<tr><td>PassengerStartupLoader</td><td>Load CSV records after Spring startup, publish them into shared state, and log the loaded total.</td></tr>
+<tr><td>PassengerState</td><td>Maintain an immutable in-memory passenger snapshot and log count changes.</td></tr>
+<tr><td>BoardingPrioritySelectionState</td><td>Store the latest senior-citizen and veteran selections and log state changes.</td></tr>
+<tr><td>PassengerBoardingService</td><td>Select a comparator, return a prioritized prefix, and delegate passenger removal.</td></tr>
+<tr><td>REST controllers</td><td>Expose queue, board, and preference APIs; validate inputs and return appropriate status codes.</td></tr>
+<tr><td>Static browser application</td><td>Render passenger rows, submit API requests, refresh the queue, and show operation status.</td></tr>
+</table>
+<h2>3.9 Assumptions</h2>
+<ul>
+<li>Each passenger has a unique boarding-pass number in the sample data.</li>
+<li>The CSV uses the expected header and simple comma-separated fields with no quoted commas.</li>
+<li>Age is expressed in years; a senior-citizen indicator is true at age 58 or above.</li>
+<li>Priority selections affect list ordering and do not automatically board any passenger.</li>
+<li>The application runs as one Spring Boot process and its memory is the authoritative state during that run.</li>
+</ul>
+</div>
+
+<div class="chapter">
+<h1>CHAPTER 4 — IMPLEMENTATION</h1>
+<h2>4.1 Development Technologies</h2>
+<table><tr><th>Technology</th><th>Use</th></tr>
+<tr><td>Java 25</td><td>Backend language and runtime baseline declared by the Maven project.</td></tr>
+<tr><td>Spring Boot 4.1.2</td><td>Application bootstrap, dependency management, web runtime, and static resource hosting.</td></tr>
+<tr><td>Spring MVC / REST</td><td>HTTP controllers and JSON APIs.</td></tr>
+<tr><td>HTML5, CSS, JavaScript</td><td>Single-page boarding interface; no frontend framework is used.</td></tr>
+<tr><td>Maven Wrapper</td><td>Repeatable project build and test commands without a separate Maven installation.</td></tr>
+<tr><td>JUnit 5, Spring Boot Test, MockMvc</td><td>Unit and web-layer verification.</td></tr>
+<tr><td>CSV classpath resource</td><td>Sample passenger input dataset.</td></tr>
+</table>
+<p>The report's C++-specific implementation sections have been adapted to Java. The source project does not contain a C++ module; it uses Java objects, Spring-managed services, Java collections, and Java comparators. No database or ORM is configured.</p>
+<h2>4.2 CSV Loading and Startup State</h2>
+<p>The CSV loader checks the exact expected header, skips blank lines, verifies the number of fields, parses age as an integer, and accepts only Yes/No veteran values. Invalid input is surfaced with an IOException that identifies the resource and line number. The startup runner calls the loader and publishes the loaded records into PassengerState. The sample dataset currently contains 200 records, and startup logs the total.</p>
+<pre>String[] fields = line.split(",", -1);
+if (fields.length != EXPECTED_HEADERS.length) {
+    throw new IOException("Invalid column count in " + RESOURCE_PATH
+            + " at line " + lineNumber);
+}
+passengers.add(new Passenger(fields[0].trim(), fields[1].trim(),
+        fields[2].trim(), fields[3].trim(),
+        Integer.parseInt(fields[4].trim()),
+        parseVeteran(fields[5].trim(), lineNumber))); </pre>
+<p>The loader uses a simple CSV split, which is sufficient for the current sample format but not a general CSV implementation. A production import should use a CSV parser that supports escaped quotes and commas, validate ranges and required identifiers, and provide an explicit import-error workflow.</p>
+<h2>4.3 Priority Comparator Implementation</h2>
+<p>The default comparator converts the zone into a numeric rank. Senior-aware comparators perform Boolean comparisons in descending priority order and use the default comparator to break ties. Keeping these policies as separate classes makes the business rule readable and testable without embedding condition chains in the controller.</p>
+<pre>private int priorityRank(Passenger passenger) {
+    String zone = passenger.getZone();
+    if (zone == null) {
+        return 4;
+    }
+    return switch (zone.trim().toUpperCase()) {
+        case "BUSINESS_CLASS" -&gt; 0;
+        case "C" -&gt; 1;
+        case "B" -&gt; 2;
+        case "A" -&gt; 3;
+        default -&gt; 4;
+    };
+}</pre>
+<p>For the senior criterion, the comparator compares the predicates <code>age &gt;= 58</code> and then delegates when both passengers fall in the same group. The combined comparator applies a veteran comparison only after senior status is tied. This means a senior non-veteran is ordered ahead of a non-senior veteran in combined mode, as verified by the comparator test.</p>
+<h2>4.4 Queue Service and State Updates</h2>
+<p>PassengerBoardingService reads the immutable passenger snapshot, chooses a comparator from the shared preference state, sorts the list, takes at most the requested limit, and returns a record containing both the selected passengers and total count. Boarding is separate: the board API removes a single record, and the UI subsequently requests the updated list.</p>
+<p>PassengerState replaces the list with a new immutable snapshot after a successful removal. The collection size is logged after changes. Priority updates are likewise held by a Spring singleton and logged only when a value changes. These choices make the state behavior easy to observe during a local demonstration; neither service saves data across restarts.</p>
+<h2>4.5 REST API Design</h2>
+<table><tr><th>Method and path</th><th>Input</th><th>Success response</th><th>Validation/error</th></tr>
+<tr><td>GET /api/passengers/boarding?limit=5</td><td>Optional integer limit; default 5.</td><td>200 JSON with passengers array and remainingPassengerCount.</td><td>400 if limit is below 1.</td></tr>
+<tr><td>POST /api/passengers/{boardingPassNumber}/board</td><td>Boarding-pass number in URL.</td><td>204 No Content.</td><td>404 if no matching passenger remains.</td></tr>
+<tr><td>POST /api/boarding-priority</td><td>JSON containing seniorCitizen and veteran Boolean values.</td><td>200 JSON of stored preference state.</td><td>400 if either property is missing/null.</td></tr>
+</table>
+<p>The queue response contains the whole remaining count, not the number of passengers returned. Thus, a response can contain five Passenger objects and report 200 remaining. After one passenger is successfully boarded, the next response contains the new sorted prefix and reports 199 remaining.</p>
+<h3>Queue request and response example</h3>
+<pre>GET /api/passengers/boarding?limit=5
+
+{
+  "passengers": [
+    {
+      "passengerName": "Mei Khan",
+      "boardingPassNumber": "BP2263132191",
+      "seatNumber": "16C",
+      "zone": "C",
+      "age": 11,
+      "veteran": false
+    }
+  ],
+  "remainingPassengerCount": 200
+}</pre>
+<p>The example shows one passenger object for readability; the actual endpoint returns up to the requested limit. The age is included in the backend JSON model so the browser can calculate the senior-citizen indicator, but the interface displays Yes/No rather than the age.</p>
+<h2>4.6 Browser Interface</h2>
+<p>The page uses a navy and teal airline-inspired visual theme, an AeroSwift wordmark, sample flight and gate details, a queue panel, and a priority panel. Passenger rows are built with DOM elements and textContent rather than inserting passenger data as HTML. Each button carries the boarding-pass number as a data attribute and has an accessible label that includes the passenger's zone and status indicators. The page shows loading, success, empty-queue, and error messages.</p>
+<p>On initial page load, the browser requests <code>/api/passengers/boarding?limit=5</code>. When either priority radio group changes, the JavaScript serializes preference updates and refreshes the list after the API confirms the saved values. When a passenger button is selected, it sends a POST request to the board endpoint and then refreshes the queue. Requests disable the passenger buttons while the board operation is in progress to prevent accidental double submission.</p>
+<pre>const seniorCitizenStatus = passenger.age &gt;= 58 ? "Yes" : "No";
+const veteranStatus = passenger.veteran ? "Yes" : "No";
+metadata.textContent = `Zone: ${passenger.zone} · Veteran: ${veteranStatus}`
+  + ` · Senior citizen: ${seniorCitizenStatus}`;</pre>
+<p class="caption">Figure 4.1 — Boarding screen information layout (logical representation)</p>
+<table><tr><th>Flight banner</th><th>Queue panel</th><th>Priority panel</th></tr>
+<tr><td>AeroSwift branding, route, destination, and gate label (sample values).</td><td>Next five passenger buttons, remaining queue count, and status message.</td><td>Default order summary and Yes/No controls for senior-citizen and veteran priorities.</td></tr>
+</table>
+<h2>4.7 Error Handling and Observability</h2>
+<p>The controllers return explicit HTTP status codes for invalid limits, missing priority values, and unknown boarding-pass numbers. The browser checks the response status before attempting to process JSON. Errors are written to the browser console and shown as readable status text. Startup logs the loaded passenger count; state services log passenger-count changes and changed priority selections. These logs are intended for local development and are not a privacy or audit solution.</p>
+<h2>4.8 Running the Application</h2>
+<p>From the project directory on Windows, run <code>.\mvnw.cmd spring-boot:run</code>, then open <code>http://localhost:8080</code> in a modern browser. Run <code>.\mvnw.cmd test</code> to execute automated tests. Java 25 is declared by the project. The Maven Wrapper is included so a separate Maven installation is not required.</p>
+</div>
+
+<div class="chapter">
+<h1>CHAPTER 5 — TESTING AND RESULTS</h1>
+<h2>5.1 Verification Strategy</h2>
+<p>Verification focuses on the requirements that can be tested locally without an airline environment. Comparator tests exercise priority ordering directly. CSV-loader tests check the expected sample dataset. Spring Boot integration tests use MockMvc to exercise API behavior and check queue selection, removal, and invalid limits. The reported test run used the Maven Wrapper and passed 13 tests. This is evidence for the tested prototype paths, not a certification of production readiness.</p>
+<pre>Project source
+    |
+    +-- comparator unit tests
+    +-- CSV loading test
+    +-- Spring Boot / MockMvc API tests
+              |
+              +-- inspect status codes, JSON fields, ordering, and queue count
+    |
+    +-- Maven Wrapper test command</pre>
+<p class="caption">Figure 5.1 — Verification workflow</p>
+<h2>5.2 Test Cases and Outcomes</h2>
+<table><tr><th>ID</th><th>Test purpose</th><th>Expected result</th><th>Observed outcome</th></tr>
+<tr><td>TC-01</td><td>Load the packaged CSV.</td><td>200 Passenger objects; first sample record fields are parsed; at least one veteran is present.</td><td>Passed.</td></tr>
+<tr><td>TC-02</td><td>Default comparator ordering.</td><td>Business_Class precedes C, then B, then A.</td><td>Passed.</td></tr>
+<tr><td>TC-03</td><td>Equal default-priority passengers.</td><td>Comparator returns equality for passengers in the same zone rank.</td><td>Passed.</td></tr>
+<tr><td>TC-04</td><td>Senior and veteran comparator ordering.</td><td>Age 58+ before younger passengers; senior before veteran group; default rank breaks ties.</td><td>Passed.</td></tr>
+<tr><td>TC-05</td><td>Default queue API.</td><td>HTTP 200, next five ordered passengers, full remaining count of 200.</td><td>Passed.</td></tr>
+<tr><td>TC-06</td><td>Comparator selection by preference values.</td><td>All four combinations select the documented comparator.</td><td>Passed.</td></tr>
+<tr><td>TC-07</td><td>Board a passenger.</td><td>HTTP 204; passenger removed; count changes from 200 to 199.</td><td>Passed.</td></tr>
+<tr><td>TC-08</td><td>Non-positive queue limit.</td><td>HTTP 400 Bad Request.</td><td>Passed.</td></tr>
+<tr><td>TC-09</td><td>Priority preference validation.</td><td>Missing preference value is rejected.</td><td>Covered by controller tests.</td></tr>
+</table>
+<p>The automated test suite executed through Maven reports 13 passing tests. The table summarizes behavior covered by the tests rather than claiming that each row corresponds to a separate test method. No browser automation, concurrency stress test, security penetration test, or airline integration test was run.</p>
+<h2>5.3 Results and Interpretation</h2>
+<p>The implemented backend can load the sample passenger set, keep it in memory, return a prioritized prefix, update its priority mode, and remove a selected passenger. The user interface consumes the same APIs and refreshes its visible list after state changes. Comparator behavior is deterministic for the defined rules. The tests confirm the principal data and API flows under local test conditions.</p>
+<p>These results demonstrate functional correctness for a prototype and do not establish that passengers will board faster or experience less crowding. Such conclusions would require a controlled field study, operational data, participant feedback, and comparison against a defined baseline. The application also does not model aircraft aisle conflicts, seat positions, carry-on luggage, family groups, accessibility constraints, or gate-agent workload.</p>
+<h2>5.4 Complexity Analysis</h2>
+<p>Let <i>n</i> be the number of passengers in the active in-memory list and <i>k</i> be the requested display limit. The analysis below describes asymptotic cost in the current implementation; it is not a benchmark.</p>
+<table><tr><th>Operation</th><th>Time complexity</th><th>Additional space</th><th>Explanation</th></tr>
+<tr><td>CSV loading</td><td>O(n)</td><td>O(n)</td><td>Each row is read and converted once; all passengers are retained.</td></tr>
+<tr><td>One comparator invocation</td><td>O(1)</td><td>O(1)</td><td>Uses a small fixed number of field comparisons.</td></tr>
+<tr><td>Queue retrieval</td><td>O(n log n)</td><td>O(n)</td><td>The full stream is sorted before limiting to k records.</td></tr>
+<tr><td>Passenger removal</td><td>O(n)</td><td>O(n)</td><td>The current list is copied and searched; a new immutable list is stored.</td></tr>
+<tr><td>Priority update</td><td>O(1)</td><td>O(1)</td><td>Replaces an immutable selection record.</td></tr>
+</table>
+<p>For the current dataset of 200 passengers, this simple in-memory approach is appropriate for a classroom demonstration. For a substantially larger dataset or many concurrent users, a database-backed query with indexed attributes and transaction-safe boarding would be more suitable. A partial selection algorithm could reduce the cost of returning a small prefix, but it would add complexity and should be justified by measured scale.</p>
+<h2>5.5 Limitations and Risks</h2>
+<ul>
+<li><b>In-memory data:</b> boarded passengers and preferences are lost when the process restarts.</li>
+<li><b>Single process:</b> multiple application instances would not share queue state.</li>
+<li><b>Policy simplification:</b> comparators encode a small fixed policy and do not represent airline-specific rules.</li>
+<li><b>Sample data:</b> passenger records are illustrative; this application should not be given real personal or travel data without appropriate controls.</li>
+<li><b>CSV format:</b> the current parser supports the simple sample format, not all CSV quoting and escaping rules.</li>
+<li><b>No authentication:</b> any client able to reach the local endpoints could change preferences or board a passenger.</li>
+<li><b>No measured outcomes:</b> there is no evidence of improved boarding time, reduced waiting, or passenger satisfaction.</li>
+</ul>
+</div>
+
+<div class="chapter">
+<h1>CHAPTER 6 — CONCLUSION AND FUTURE WORK</h1>
+<h2>6.1 Conclusion</h2>
+<p>AeroSwiftBoard implements a small end-to-end boarding-gate demonstration using Java, Spring Boot, and plain browser technologies. It loads a sample passenger list from CSV, stores the current list and preference state in Spring singleton services, applies explicit comparator policies, exposes REST APIs, and renders the next five passengers in a responsive single-page interface. The application can record the boarding of a selected passenger and refresh the displayed queue.</p>
+<p>The project meets its learning objectives by connecting data structures, comparator logic, API design, client-side interaction, and automated testing. The use of an immutable passenger-list snapshot and separate comparator classes keeps state changes and priority rules understandable. The automated test run passed 13 tests covering the key backend behaviors.</p>
+<p>The system remains a prototype. Its behavior is limited to a local process and sample data, and it has no persistence, user authentication, operational airline integration, or measured passenger outcome. It should not be deployed as a real airport boarding tool without a substantially broader design, security review, operational validation, and airline approval.</p>
+<h2>6.2 Future Enhancements</h2>
+<ol>
+<li><b>Persistent storage:</b> Add a relational database, transactions, and a durable boarding audit history.</li>
+<li><b>Identity and authorization:</b> Authenticate gate staff and restrict boarding and preference changes to authorized roles.</li>
+<li><b>Operational integration:</b> Integrate through documented airline APIs for flight, passenger, seat, and boarding-pass data, with explicit failure handling.</li>
+<li><b>Policy configuration:</b> Define airline-approved boarding groups and priority rules as validated configuration instead of hard-coded comparators.</li>
+<li><b>Accessibility and resilience:</b> Conduct accessibility testing, provide localized and high-contrast modes, and ensure the screen remains usable when network calls fail.</li>
+<li><b>Queue concurrency:</b> Add idempotent board requests, database locking or equivalent concurrency control, and conflict responses for simultaneous agents.</li>
+<li><b>Observability:</b> Use structured logs and metrics while minimizing passenger information in logs.</li>
+<li><b>Evaluation:</b> Conduct a user study or simulation using an approved, anonymized dataset and compare clearly defined boarding scenarios.</li>
+</ol>
+<h2>6.3 Final Note</h2>
+<p>The project's strongest outcome is a transparent demonstration of how a small web interface can call backend APIs and reflect an explicit ordering policy. Future work should prioritize correctness, privacy, accessibility, and operational safety before attempting real-world deployment.</p>
+</div>
+
+<div class="chapter">
+<h1>REFERENCES</h1>
+<!--REFERENCES_PLACEHOLDER-->
+</div>
+
+<div class="appendix">
+<h1>APPENDIX A — PROJECT SOURCE CODE</h1>
+<p>This appendix contains the application source files used to implement the prototype. The code is reproduced from the project workspace at report generation time. The passenger sample CSV is not printed in full because it contains many rows; its schema and a sanitized example are described in Appendix B.</p>
+<!--SOURCE_APPENDIX-->
+</div>
+
+<div class="appendix">
+<h1>APPENDIX B — USER AND DEVELOPER GUIDE</h1>
+<h2>B.1 Start the application</h2>
+<ol>
+<li>Install a Java 25 development runtime.</li>
+<li>Open a terminal in the project root.</li>
+<li>On Windows, run <code>.\mvnw.cmd spring-boot:run</code>.</li>
+<li>Wait for Spring Boot to finish starting and for the startup log to report the passenger count.</li>
+<li>Open <code>http://localhost:8080</code> in a browser.</li>
+</ol>
+<h2>B.2 Use the boarding screen</h2>
+<ol>
+<li>Review the five passengers displayed under “Next passengers.” The queue count shows all passengers still in the active in-memory list.</li>
+<li>Use the Senior citizen and Veteran Yes/No controls to change the active sorting preference. The application saves the selection and refreshes the list.</li>
+<li>When the passenger is ready to board, select that passenger's BOARD button. The backend removes the passenger and the page refreshes.</li>
+<li>Read the status message if the request fails. Reloading the application resets the queue to the CSV dataset.</li>
+</ol>
+<h2>B.3 API quick reference</h2>
+<pre>GET  /api/passengers/boarding?limit=5
+POST /api/passengers/{boardingPassNumber}/board
+POST /api/boarding-priority
+Content-Type: application/json
+
+{"seniorCitizen": true, "veteran": false}</pre>
+<h2>B.4 Run automated tests</h2>
+<p>From the project root, run <code>.\mvnw.cmd test</code>. The test suite checks CSV loading, comparator order, preference-based selection, queue retrieval, invalid limits, and removal behavior. The report's recorded run passed 13 tests; rerun the command before submission if the source has changed.</p>
+<h2>B.5 Sample data format</h2>
+<pre>Passanger_Name,Boarding_Pass_Number,seat_number,zone,Age,Veteran
+Mei Khan,BP2263132191,16C,C,11,No</pre>
+<p>Use the exact header and Yes/No veteran values. The data is sample content. Do not load real passenger information into this demonstration without appropriate authorization and privacy safeguards.</p>
+</div>
+
+<div class="appendix">
+<h1>APPENDIX C — SIMILARITY / ACADEMIC INTEGRITY DOCUMENTATION</h1>
+<p>Attach the similarity report, declaration form, or other academic-integrity documentation required by the department in this section. No similarity percentage or institutional review result is generated or claimed by this project report.</p>
+<p style="margin-top:40pt;">[Insert institution-approved document here, if required.]</p>
+</div>
+
+<div class="appendix">
+<h1>APPENDIX D — INDIVIDUAL PROJECT ACTIVITY LOG</h1>
+<p>This project was completed individually. The table is left blank for the student to enter truthful dates and activities from personal records; no weekly activity history has been inferred.</p>
+<table><tr><th>Week / date range</th><th>Work completed</th><th>Evidence or notes</th><th>Student initials</th></tr>
+<tr><td style="height:35pt;"></td><td></td><td></td><td></td></tr>
+<tr><td style="height:35pt;"></td><td></td><td></td><td></td></tr>
+<tr><td style="height:35pt;"></td><td></td><td></td><td></td></tr>
+<tr><td style="height:35pt;"></td><td></td><td></td><td></td></tr>
+<tr><td style="height:35pt;"></td><td></td><td></td><td></td></tr>
+<tr><td style="height:35pt;"></td><td></td><td></td><td></td></tr>
+</table>
+<p>Student signature: ___________________________ &nbsp;&nbsp; Date: __________________</p>
+</div>
+
+</body>
+</html>

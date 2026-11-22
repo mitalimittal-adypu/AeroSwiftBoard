@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="1480" viewBox="0 0 1400 1480" role="img" aria-labelledby="title description">
+  <title id="title">AeroSwiftBoard boarding flowchart</title>
+  <desc id="description">Flowchart of application startup, queue requests, comparator selection, passenger boarding, error handling, and refreshing the user interface.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M1 1 L11 6 L1 11 Z" fill="#52677d"/>
+    </marker>
+    <style>
+      .title { font: 700 28px "Segoe UI", Arial, sans-serif; fill: #10263f; }
+      .subtitle { font: 15px "Segoe UI", Arial, sans-serif; fill: #607387; }
+      .label { font: 700 16px "Segoe UI", Arial, sans-serif; fill: #10263f; }
+      .body { font: 14px "Segoe UI", Arial, sans-serif; fill: #34495b; }
+      .small { font: 12px "Segoe UI", Arial, sans-serif; fill: #607387; }
+      .node { fill: #fff; stroke: #42627f; stroke-width: 2; }
+      .start { fill: #e8f5ee; stroke: #32835a; }
+      .data { fill: #fff7e8; stroke: #c28b2c; }
+      .process { fill: #edf4fa; stroke: #426f96; }
+      .success { fill: #eaf5f5; stroke: #138486; }
+      .error { fill: #fff0ef; stroke: #bd5a50; }
+      .decision { fill: #fff; stroke: #42627f; stroke-width: 2; }
+      .line { fill: none; stroke: #52677d; stroke-width: 2.5; marker-end: url(#arrow); }
+      .branch { font: 700 12px "Segoe UI", Arial, sans-serif; fill: #52677d; }
+    </style>
+  </defs>
+
+  <rect width="1400" height="1480" fill="#f5f8fa"/>
+  <text x="700" y="52" text-anchor="middle" class="title">AeroSwiftBoard — Main Boarding Flow</text>
+  <text x="700" y="80" text-anchor="middle" class="subtitle">Startup, queue retrieval, priority sorting, and board action</text>
+
+  <!-- Startup and request entry -->
+  <path d="M700 145 V182" class="line"/>
+  <path d="M700 270 V302" class="line"/>
+  <path d="M700 372 V392" class="line"/>
+  <rect x="600" y="92" width="200" height="54" rx="27" class="node start"/>
+  <text x="700" y="126" text-anchor="middle" class="label">Start</text>
+  <rect x="440" y="184" width="520" height="86" rx="14" class="node data"/>
+  <text x="700" y="219" text-anchor="middle" class="label">Load and validate passengers.csv</text>
+  <text x="700" y="247" text-anchor="middle" class="body">Initialize in-memory passenger list</text>
+  <rect x="440" y="304" width="520" height="68" rx="14" class="node process"/>
+  <text x="700" y="333" text-anchor="middle" class="label">Receive request from the browser UI</text>
+  <text x="700" y="356" text-anchor="middle" class="small">Queue request, preference update, or board action</text>
+
+  <!-- Request type decision -->
+  <path d="M570 462 L390 550" class="line"/>
+  <path d="M830 462 L1010 550" class="line"/>
+  <text x="445" y="503" class="branch">Queue request</text>
+  <text x="930" y="503" class="branch">Board request</text>
+  <polygon points="700,392 830,462 700,532 570,462" class="decision"/>
+  <text x="700" y="456" text-anchor="middle" class="label">Request</text>
+  <text x="700" y="478" text-anchor="middle" class="label">type?</text>
+
+  <!-- Queue branch -->
+  <path d="M390 640 V680" class="line"/>
+  <rect x="160" y="552" width="460" height="88" rx="14" class="node process"/>
+  <text x="390" y="587" text-anchor="middle" class="label">Get next passengers</text>
+  <text x="390" y="615" text-anchor="middle" class="body">GET /api/passengers/boarding?limit=5</text>
+
+  <path d="M270 772 L152 838" class="line"/>
+  <path d="M390 837 V866" class="line"/>
+  <text x="192" y="808" class="branch">No</text>
+  <text x="400" y="851" class="branch">Yes</text>
+  <polygon points="390,680 510,745 390,810 270,745" class="decision"/>
+  <text x="390" y="739" text-anchor="middle" class="label">Limit &gt; 0?</text>
+  <text x="390" y="761" text-anchor="middle" class="small">Validate request</text>
+  <rect x="18" y="838" width="270" height="72" rx="14" class="node error"/>
+  <text x="153" y="868" text-anchor="middle" class="label">Return HTTP 400</text>
+  <text x="153" y="891" text-anchor="middle" class="body">Invalid queue limit</text>
+
+  <rect x="160" y="868" width="460" height="76" rx="14" class="node process"/>
+  <text x="390" y="900" text-anchor="middle" class="label">Read saved priority preferences</text>
+  <text x="390" y="925" text-anchor="middle" class="small">Senior citizen and veteran selections</text>
+  <path d="M390 944 V972" class="line"/>
+  <rect x="160" y="974" width="460" height="86" rx="14" class="node process"/>
+  <text x="390" y="1008" text-anchor="middle" class="label">Select comparator and sort queue</text>
+  <text x="390" y="1036" text-anchor="middle" class="body">Default · Senior · Senior and veteran</text>
+  <path d="M390 1060 V1090" class="line"/>
+  <rect x="160" y="1092" width="460" height="78" rx="14" class="node success"/>
+  <text x="390" y="1124" text-anchor="middle" class="label">Return up to limit passengers</text>
+  <text x="390" y="1150" text-anchor="middle" class="body">Include total remaining queue count</text>
+
+  <!-- Board branch -->
+  <path d="M1010 640 V680" class="line"/>
+  <rect x="780" y="552" width="460" height="88" rx="14" class="node process"/>
+  <text x="1010" y="587" text-anchor="middle" class="label">Board selected passenger</text>
+  <text x="1010" y="615" text-anchor="middle" class="body">POST with boarding-pass number</text>
+  <path d="M1010 768 V790" class="line"/>
+  <rect x="780" y="682" width="460" height="86" rx="14" class="node process"/>
+  <text x="1010" y="717" text-anchor="middle" class="label">Find and remove passenger</text>
+  <text x="1010" y="745" text-anchor="middle" class="body">Update in-memory passenger list</text>
+  <path d="M890 904 L797 962" class="line"/>
+  <path d="M1130 904 L1200 962" class="line"/>
+  <text x="817" y="933" class="branch">Yes</text>
+  <text x="1160" y="935" class="branch">No</text>
+  <polygon points="1010,790 1130,855 1010,920 890,855" class="decision"/>
+  <text x="1010" y="850" text-anchor="middle" class="label">Passenger</text>
+  <text x="1010" y="872" text-anchor="middle" class="label">found?</text>
+  <rect x="1090" y="964" width="290" height="76" rx="14" class="node error"/>
+  <text x="1235" y="994" text-anchor="middle" class="label">Return HTTP 404</text>
+  <text x="1235" y="1018" text-anchor="middle" class="body">Passenger not found</text>
+  <path d="M890 855 H760 V1080 H890" class="line"/>
+  <rect x="780" y="1082" width="460" height="78" rx="14" class="node success"/>
+  <text x="1010" y="1114" text-anchor="middle" class="label">Boarding recorded</text>
+  <text x="1010" y="1140" text-anchor="middle" class="body">Passenger removed; count updated</text>
+
+  <!-- Successful paths converge at refresh -->
+  <path d="M390 1170 V1212 H580" class="line"/>
+  <path d="M1010 1160 V1212 H820" class="line"/>
+  <rect x="510" y="1214" width="380" height="74" rx="14" class="node success"/>
+  <text x="700" y="1245" text-anchor="middle" class="label">Refresh boarding queue</text>
+  <text x="700" y="1270" text-anchor="middle" class="small">UI requests and displays the updated list</text>
+  <path d="M700 1288 V1320" class="line"/>
+  <rect x="500" y="1322" width="400" height="70" rx="14" class="node start"/>
+  <text x="700" y="1352" text-anchor="middle" class="label">Wait for next UI action</text>
+  <text x="700" y="1376" text-anchor="middle" class="small">State is in memory and resets on restart</text>
+
+  <text x="700" y="1440" text-anchor="middle" class="small">Preference updates save the selection; the UI then requests the queue again.</text>
+</svg>
